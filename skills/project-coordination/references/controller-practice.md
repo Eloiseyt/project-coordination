@@ -98,6 +98,8 @@ When a failure or warning warrants action, follow a causal sequence:
 
 Keep the record short: fact, causal judgment and uncertainty, changed method, owner, next observation, result. Place it in existing project decisions rather than creating another management system.
 
+Retire process debt as well as adding safeguards. At the next relevant observation, merge duplicate instructions and remove obsolete project procedures when their original reason no longer applies. Preserve the decision history and any still-effective user requirement. A project-method cleanup does not authorize editing the shared skill or erasing an explicit constraint.
+
 Separate three kinds of change. A **product fix** corrects behavior and needs appropriate regression evidence. A **project-method change** alters how this project divides, reviews, or resumes work and is checked at its next relevant checkpoint. A **permanent skill or memory update** affects future work and requires the applicable explicit authorization and validation. Success in one project does not automatically authorize that third change.
 
 For example, an omitted acceptance condition may require both a product correction and a better brief. Adding a reviewer without fixing the brief does not address that cause. Repeated interface rework may instead require one contract owner and fewer concurrent writers. If the review queue keeps growing, do not dispatch more implementation to make the activity look productive.

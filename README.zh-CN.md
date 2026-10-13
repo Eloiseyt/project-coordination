@@ -16,7 +16,19 @@
 
 技能入口：[skills/project-coordination/SKILL.md](skills/project-coordination/SKILL.md)。将该目录安装到你所用工具支持的技能位置，或直接让代理读取入口。支持 Agent Skills 格式的工具可使用其中的标准入口；`agents/openai.yaml` 是可选的 Codex 界面元数据。
 
-下载与更新以本仓库发布版本为准。安装前检查内容；技能不附带运行脚本、依赖安装器或自动修改配置的钩子。
+如果已有 Node.js 和 npm，在目标项目目录运行：
+
+```sh
+npx skills@1.7.2 add Eloiseyt/project-coordination --skill project-coordination --agent codex --copy
+```
+
+这是第三方 Skills CLI，默认按项目安装；检查它展示的路径与提示，不加 `--global` 即保持项目范围。命令固定安装工具版本，但获取的是仓库当前技能版本。也可从 [GitHub Releases](https://github.com/Eloiseyt/project-coordination/releases) 下载指定版本，只将 `skills/project-coordination` 放入客户端支持的技能目录；Codex 项目范围可使用 `.agents/skills/project-coordination`。已存在的本地修改应先比较并保留。
+
+安装后，在该项目的新聊天中调用 `$project-coordination`，让它说明实际加载的技能版本、当前角色和下一步，并与安装文件的元数据核对。文件存在不代表客户端已经加载成功。安装工具可以设置 `DISABLE_TELEMETRY=1` 关闭统计，不应为了榜单曝光而要求用户开启。
+
+更新前记录版本并保留本地修改。CLI 安装可先用 `npx skills@1.7.2 check` 检查，再重新运行上述定向安装命令；批量 `skills update` 可能影响其他技能。需要固定版本或恢复旧版时，使用对应 Release 的手动安装方式。恢复技能文件不会撤销它此前产生的项目修改。
+
+技能包没有运行代码或自动配置钩子；仓库另附可选的 Python 检查脚本，仅供维护者使用，不安装进技能目录。完整安装说明和边界见[英文首页](README.md)，实际验证范围见 [VALIDATION.md](VALIDATION.md)。
 
 示例：
 
@@ -24,7 +36,7 @@
 
 如果是已有项目，请提供当前记录和工作位置，总控应核实后接着尚未完成的部分推进。如果还在讨论，可以明确说：“先帮我整理和完善需求，等我确认架构后再正式实施或修改产品。”如果方案已经确认，可以说：“按这个方案实施并验证。”技能会区分这些情况，既避免提前动手，也避免对已批准的步骤反复请示。
 
-完整逻辑见[项目协作架构](skills/project-coordination/references/operating-model.md)。
+完整逻辑见[项目协作架构](skills/project-coordination/references/operating-model.md)。[完整使用示例](examples/first-project.md)展示需求、分工、结果返回与累计汇报；它是教学示例，不是真实项目成效数据。
 
 ## 怎样分工
 
@@ -88,4 +100,6 @@ flowchart TD
 
 这是一份协作技能，不是代理运行框架，也不会自动开启后台监督或授予部署权限。它不承诺百分比节省、零返工或官方认证。验证结果见 [VALIDATION.md](VALIDATION.md)，依据见[来源与限制](skills/project-coordination/references/sources.md)。
 
-当前版本：0.2.0。MIT 许可。尚需通过真实项目持续检验；提交问题时请提供经过脱敏的场景、预期行为与实际差异，不上传凭据或用户材料。
+维护者为 [Eloiseyt](https://github.com/Eloiseyt)。本地仓库可用 Python 3.10 以上运行 `python scripts/check_package.py`，只检查文件结构、元数据、链接等；它不等于行为验证或安全认证。修改方法见 [CONTRIBUTING.md](CONTRIBUTING.md)，版本变更见 [CHANGELOG.md](CHANGELOG.md)。
+
+当前版本：0.2.1。MIT 是开源许可，不是认证。目录收录、安装量、安全扫描与质量认可分别判断。尚需通过真实项目持续检验；提交问题时请提供版本、经过脱敏的场景、预期行为与实际差异，不上传凭据或用户材料。

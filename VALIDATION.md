@@ -1,10 +1,34 @@
 # Validation record
 
-Version 0.2.0 · 2026-10-14.
+Version 0.2.1 · 2026-10-14.
+
+This patch shortens the entrypoint, adds role-aware entry, and improves installation, examples, and maintainability. It preserves the full operating model. The records below distinguish new checks from historical evidence.
+
+## Version 0.2.1 checks
+
+| Check | Result | Scope and limit |
+| --- | --- | --- |
+| Behavioral exercises M–O | Independent evaluator completed all three using only the candidate skill and raw scenario inputs | Read entrypoint, task routing, and recovery; no live actions or full-suite rerun |
+| Observed decisions | Kept reviewer ownership, accumulated the keyboard requirement, proceeded after existing approval, verified succession, held migration-dependent release, preserved independent work | Written decisions, not product acceptance |
+| Package checks | Passed public checker, skill-creator quick_validate, and whitespace check | Narrow package conventions; no security certification |
+| Checker challenge | Clean candidate accepted; seven isolated defects rejected | Missing link target, outside-root link, unclosed fence, license drift, private path, misplaced metadata version, and stale current-version declaration; not exhaustive parser testing |
+| Bounded editorial review | Independent reviewer read both overviews, walkthrough, contribution guide, and checker; two checker weaknesses corrected and exercised by the author | No new architecture review; targeted negative cases verify the corrections, not a full independent re-review |
+| Installation | Skills CLI 1.7.2 installed public 0.2.0 and local 0.2.1 in separate clean project directories; all 13 candidate skill files matched source hashes; CLI listed the installed skill for Codex | Windows, project scope, copy mode, noninteractive confirmation; public 0.2.1 download not yet exercised |
+| Client loading | Not independently exercised through fresh desktop discovery | Reading the skill explicitly in an evaluator is not proof of automatic client discovery |
+| Existing local installation | Verified all 13 previous files against the saved 0.2.0 fingerprint, preserved a backup, previewed the update, then verified all 13 updated files against 0.2.1 source | File-level installation integrity; does not claim a newly opened desktop session loaded it |
+| Real project efficiency | Not measured | No percentage savings or reliability guarantee |
+
+The new public `scripts/check_package.py` is a standard-library, read-only convention checker. It does not parse arbitrary YAML, verify remote links or Markdown heading anchors, execute behavioral scenarios, or certify security. External directory and security-review status must be verified separately.
+
+Installation tests disabled CLI telemetry and npm lifecycle scripts. An initial Git HTTPS failure came from the test machine's certificate-file configuration; a process-scoped Windows certificate backend resolved it with TLS verification still enabled. This is environment recovery, not a skill behavior fix. No global Git configuration was changed.
+
+The entrypoint decreased from 2,142 to 1,132 whitespace-separated words. The full operating model remains available on demand. Word-count reduction is not a measured token or project-cost reduction.
+
+## Historical release: 0.2.0
 
 This release expands the skill into a complete project operating model: a beginner-facing explanation of the integration lead, planning at project/batch/task level, continuous delivery, request routing, reporting and cost, and improvement and continuity. English is the canonical rule set; the Chinese README is an overview.
 
-## Current release checks
+## Version 0.2.0 checks
 
 | Check | Result | Scope and limit |
 | --- | --- | --- |

@@ -14,7 +14,25 @@ The skill provides both the overall architecture and the practical steps: how to
 
 ## Get started
 
-Start with [SKILL.md](skills/project-coordination/SKILL.md), or read the [complete operating model](skills/project-coordination/references/operating-model.md) to understand the architecture. Install the `skills/project-coordination` directory through a tool that supports Agent Skills, or ask your agent to read the entrypoint. The optional `agents/openai.yaml` provides Codex interface metadata.
+Start with the short [skill entrypoint](skills/project-coordination/SKILL.md). The [complete operating model](skills/project-coordination/references/operating-model.md) explains the architecture when you want the full picture.
+
+With Node.js and npm available, run this from the project where you want to use the skill:
+
+```sh
+npx skills@1.7.2 add Eloiseyt/project-coordination --skill project-coordination --agent codex --copy
+```
+
+This uses the third-party [Skills CLI](https://github.com/vercel-labs/skills). It downloads the current repository version and copies it at project scope by default. Review its prompts and proposed paths; omit `--global` to keep the installation within this project. The CLI version is pinned for reproducibility; the skill version is not pinned by that command. See [validation](VALIDATION.md) for what was actually tested.
+
+For a manual or version-pinned installation, download a chosen [GitHub release](https://github.com/Eloiseyt/project-coordination/releases), inspect it, and copy only `skills/project-coordination` into the skill directory supported by your client. In Codex, a project installation can use `.agents/skills/project-coordination`. Follow the current [Codex skills documentation](https://developers.openai.com/codex/skills/) for discovery paths; custom user-wide configurations may differ. Do not overwrite a locally modified copy without comparing and preserving it.
+
+The skill package contains instructions and interface metadata, not runtime code or automatic configuration hooks. The repository's optional Python checker is for maintainers and is not part of the installed skill. An installer is a separate executable tool; inspect that tool too. The Skills CLI supports opting out of telemetry with `DISABLE_TELEMETRY=1`; directory visibility is not a reason to override that choice.
+
+### Confirm it is available
+
+Open a fresh conversation in that project and invoke `$project-coordination`. Ask it to identify the loaded skill and its version, explain its current role, and name the next step without modifying the project. Compare its answer with the installed `SKILL.md` metadata. If it cannot locate the skill, check the actual installation path and your client's discovery settings. A file on disk alone does not prove the client loaded it.
+
+### Start the first session
 
 > Use $project-coordination to lead this project. Establish the complete goal and current state, recommend the smallest useful team, and define the next usable result and reporting format. Keep work within my existing authorization and honor any confirmation steps I request.
 
@@ -24,7 +42,13 @@ For a planning conversation, you can say: “Help me organize and improve the re
 
 The canonical skill and references are in English. Agents should still communicate in the user's language. The Chinese overview is documentation, not a second set of skill rules.
 
-Review the contents before installing. This package includes no runtime scripts, dependency installer, or configuration hooks.
+See the [filled walkthrough](examples/first-project.md) for requirements, a bounded assignment, a returned candidate, and the resulting cumulative report. It is an illustrative project, not a claim of measured results.
+
+### Update or go back
+
+Before updating, record the installed version and preserve local edits. For CLI-managed installations, use `npx skills@1.7.2 check` to inspect available updates. Re-running the targeted `add` command updates this selected skill after you review the prompts; `skills update` may affect other managed skills too. Recheck the installed metadata and start a fresh conversation afterward.
+
+For a fixed version or rollback, use the manual release installation above, preserving the current copy first. Restore the chosen skill files only; reverting a skill does not undo project changes already made under its guidance. Release tags identify content, not security certification.
 
 ## How the work fits together
 
@@ -94,4 +118,12 @@ This is a coordination skill, not an agent runtime. It grants no deployment auth
 
 See [validation](VALIDATION.md), [evaluation scenarios](evaluations/SCENARIOS.md), and [sources](skills/project-coordination/references/sources.md). Report issues with a sanitized scenario, expected behavior, and observed difference; do not upload credentials or user documents.
 
-Version 0.2.0 · MIT License.
+## Maintain and share
+
+Run `python scripts/check_package.py` from a checkout with Python 3.10 or newer. This read-only, standard-library check covers package metadata, local file links, fences, license consistency, and a small set of accidental private markers. It neither runs behavioral exercises nor certifies security. Contribution and release guidance is in [CONTRIBUTING.md](CONTRIBUTING.md); changes are recorded in [CHANGELOG.md](CHANGELOG.md).
+
+Maintained by [Eloiseyt](https://github.com/Eloiseyt). Report a problem through [GitHub Issues](https://github.com/Eloiseyt/project-coordination/issues) with the skill version, a sanitized request, the expected decision, and the observed difference. Do not include credentials, private transcripts, or user documents.
+
+MIT is a permission to use, modify, and redistribute the work under its terms, not an endorsement. Directory listings, installation counts, format checks, and security scans are separate signals. Link any external audit to its provider, date, and reviewed version before displaying a badge. No external certification is claimed.
+
+Version 0.2.1 · [MIT License](LICENSE).
