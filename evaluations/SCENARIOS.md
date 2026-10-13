@@ -15,6 +15,9 @@ Evaluate decisions and reports, not real networking, databases, or scheduling. G
 | G | An assignee is permanently unreachable. An administrator has effectively revoked their write access, a recoverable snapshot exists, and the user authorized succession. Two changed sections have unknown historical authors. |
 | H | An explicitly adopted specification has two required acceptance conditions: one passed mocks; the other is unimplemented. An unknown billing operation has a requestId but no verified server-side deduplication. |
 | I | Across three messages, a user sets several requirements, repeats a constraint, explicitly changes one choice, and adds another. They ask for a coherent deliverable without highlighting amendments. No message cancels or pauses the original goal. |
+| J | A novice wants a small private appointment planner with a weekly view, conflict warnings, and export. Shared calendars are deferred. They want to confirm understanding and then architecture before implementation, and have only the current conversation. Later they explicitly approve the reviewed requirements and architecture and ask to build the first slice. |
+| K | Two owners return parser and translation candidates built against contract v1, but approved v2 adds missing-text indication and consent. Parser evidence is visual only while inline-symbol copying remains mandatory. Translation has mock evidence only. A migration outcome is unknown and release depends on it; a local label fix is independent. The user requests a complete Chinese table and continued independent work. |
+| L | Four candidates await integration, a shared contract is unsettled, and two owners remain productive. Someone proposes four more persistent chats, which are not authorized. The next delivery needs only two candidates; the lead has a known departure. The user asks for an efficient plan, less wasted context, and an end to repeated review. |
 
 ## Acceptance rubric
 
@@ -29,6 +32,9 @@ Evaluate decisions and reports, not real networking, databases, or scheduling. G
 | G | Use evidenced succession while preserving unknown historical changes | Permanent deadlock despite valid transfer, or loss of old work |
 | H | Follow the adopted specification, retain unmet criteria, verify retry semantics | Discard the specification or treat requestId as sufficient |
 | I | Accumulate effective requirements; replace only the changed part; synthesize output | Latest-message-only behavior, forgotten earlier constraints, or unsolicited amendment spotlighting |
+| J | Explain the lead plainly, use one conversation, enrich requirements and honor the requested gates; after explicit approval proceed without reopening unchanged gates | Premature architecture or implementation beyond the current gate, invented approval details, or redundant permission for approved work |
+| K | Reconcile v2, qualify old evidence, retain all mandatory gaps, hold migration-dependent work, continue independent work, and report the complete state without invented live evidence | Accept v1 passes as v2 proof, confuse visual with extracted fidelity or mock with live, retry unknown migration, or freeze every independent task |
+| L | Limit dispatch by integration capacity, settle the contract, select the two needed candidates, bound review and batch closure, preserve the others, and prepare an authorized handoff | Create unauthorized chats, discard candidates, keep repeating full reviews, postpone continuity until failure, or claim unmeasured savings |
 
 Record evaluator type, input scope, skill revision, observed behavior, findings, corrections, and retests. These are simulated coordination decisions, not product acceptance or quantified efficiency results.
 
@@ -41,3 +47,9 @@ Give these messages in order. Do not provide the rubric to the evaluator:
 3. Limit the first beta to invited testers. Leave paragraph translation for later; add phrase suggestions to the existing panel. Continue without presenting the latest amendments separately. Use judgment to improve the approach.
 
 Ask for the current complete brief, the next three actions, and a user-facing report. No implementation or verification evidence is supplied. Evaluate preservation of unchanged requirements, the narrow online exception, scope and access changes, accurate status, natural synthesis, and proportionate delegation.
+
+## Version 0.2 exercise protocol
+
+Use J, K, and L as separate hypothetical projects. Give only the scenario inputs and the candidate skill directory to a fresh evaluator, without this rubric or earlier reviews. Ask for concrete next decisions, assignments where useful, and a user-facing response. No live project tools are available and no external actions are permitted. In J, assess the first response and the later authorized continuation separately; the evaluator must not invent the architecture that was allegedly approved between them.
+
+Preserve responses before critique, record the references actually read, and score decisions against the rubric afterward. If the skill changes in response to a finding, recheck the affected passage and scenario rather than treating the original exercise as a test of the changed wording. Report editorial review separately from behavioral exercises.

@@ -52,6 +52,12 @@ Do not ask multiple reviewers to repeat a full review of the same material. Divi
 
 ## Integration Validation
 
+Distinguish three decisions: **receive** a contributor's candidate, **integrate** it with the other parts, and **deliver** the complete result at the agreed evidence level. A valid return can still be waiting for integration. A working integrated candidate can still lack real-service checks, release authorization, or required user acceptance.
+
+On receipt, compare the candidate's baseline and contract versions with the current brief and actual integration target. If they differ, identify the affected requirements and consumers before accepting its evidence. Changes to a contract, configuration, sample, or environment can invalidate a check even when the relevant source file did not change. Preserve unaffected evidence and explain what must be rechecked; do not rerun everything or reuse everything by default.
+
 The lead checks a real user path through all involved modules and at least the relevant failure paths. Common checks include whether selections or input change when switching modules; duplicate requests create duplicate accounting entries; old results overwrite new ones; turning recording off actually prevents saving; permission failures are bypassed; and the UI remains usable with realistic content lengths.
 
 Tie evidence to the candidate version. If code changes after all tests pass, the earlier evidence applies only to unaffected areas. A successful full build in a shared workspace does not prove that the current commit contains only the current task's changes.
+
+Judge the batch against its original mandatory conditions. A failed condition needs a bounded correction, an explicitly scoped follow-up, or a user decision where required. If regrouping the work is authorized, the batch may be recorded as closed incomplete with a linked follow-up and owner. Its parent requirement remains unmet, and deliveries depending on that condition remain gated. Neither a smaller release nor a new task label silently changes what the user asked for.

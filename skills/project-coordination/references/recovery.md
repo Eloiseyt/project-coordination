@@ -8,7 +8,7 @@ Trace the actual path to the first violated contract: input → parsing or conve
 
 Form a falsifiable hypothesis and a minimal experiment. Once the evidence is sufficient, fix the responsible layer, add a meaningful regression check, and retest the original failure. Not every UI wording change needs a new test; data, concurrency, and recovery logic need appropriate verification.
 
-Stay read-only when the user requests diagnosis only. If they explicitly request a fix, or existing authorization covers it, proceed without asking again whether to start. Assess new external side effects separately against the actual authorization.
+Stay read-only when the user requests diagnosis only. Follow any explicit intake or approach-confirmation gate through [task routing](task-routing.md). If they explicitly request a fix, or existing authorization covers it, proceed without asking again whether to start. Assess new external side effects separately against the actual authorization.
 
 ## Scope and repeated failure
 
@@ -24,7 +24,7 @@ When ownership of changes is unclear, stop the affected writes, preserve the cur
 
 After a command timeout, lost connection, or uncertain message delivery, first query the actual outcome or receipt. Do not blindly repeat repository creation, commits, deployments, migrations, or billing requests. An idempotency-key field alone does not prove a retry is safe. Verify the receiver's deduplication semantics, scope, validity period, and identical request payload; an authorized retry should then reuse the same key. Failure to find a result does not mean the operation has not happened.
 
-If there is no query interface, request identifier, or access capability, record the outcome as unknown and prevent dangerous actions that depend on it. Do not invent a status interface or repeat the same query indefinitely. Tasks shown to be independent may continue.
+While the outcome is unknown, hold the affected operation and work whose correctness or safety depends on its result, including a release that assumes a migration succeeded. If there is no query interface, request identifier, or access capability, record the uncertainty and identify what evidence or access could resolve it. Do not invent a status interface or repeat the same query indefinitely. Tasks shown to be independent may continue.
 
 When owners disagree, align the input, version, and environment, then inspect the original evidence. Resolve the conflict through evidence, not votes or seniority. If a material ambiguity remains, retain a conditional conclusion and a minimal verification task.
 
@@ -45,6 +45,10 @@ Before any new write, perform read-only checks of the actual project path, versi
 ## Lead handoff
 
 Changing the lead transfers responsibility; copying a summary is not enough. Follow the project's existing approval rules. This skill does not itself authorize creating a new chat or replacing an owner.
+
+Check whether the recorded mandate covers transferring project leadership as well as assigning tasks or integration work. If it already covers succession, proceed within its conditions without asking again. If it does not, prepare a concrete handoff and seek the missing transfer decision before changing the lead. Do not infer either permission or a new approval requirement merely from the word "delegation."
+
+Prepare a transfer before a known departure or foreseeable capacity problem. First consider whether a smaller batch, better checkpoint, or delegated integration would preserve continuity more cheaply. A long conversation alone does not require succession. Use [controller practice](controller-practice.md) to assess the need; use the sequence below once a transfer is justified and authorized.
 
 The handoff includes project goals and cumulative requirements, an index of effective original instructions, reading coverage, key technical and product decisions, current tasks and dependencies, code and environment baselines, ownership of changes, protected data, verification and release facts, operations in progress or with unknown outcomes, risks, and next steps.
 
