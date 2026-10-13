@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目协作 · Project Coordination"
+  short_description: "Coordinate ownership, milestones, reviews, and reporting"
+  default_prompt: "Use $project-coordination to organize this project with clear ownership, bounded delegation, evidence-based reviews, and consistent progress reports."
