@@ -1,39 +1,60 @@
-# 生命周期与节点
+# Lifecycle and Checkpoints
 
-阶段按风险选择，不要求每个项目跑齐。已有项目从当前有效节点进入，不为了流程重写全部历史。
+Choose stages according to risk; not every project needs every stage. Enter an existing project at its current valid checkpoint instead of rewriting its entire history to satisfy a process.
 
-| 阶段 | 必须弄清楚 | 总控与执行者的动作 | 离开此阶段的证据 |
+| Stage | What must be clear | Lead and assignee actions | Evidence needed to leave the stage |
 | --- | --- | --- | --- |
-| 0 接单/立项 | 用户问题、目标用户、首个可用结果、非目标、数据/费用/发布边界 | 总控确认范围；执行者探查现有能力，必要时做最小实验 | 可检验的验收描述，关键未知和负责人 |
-| 1 最小贯通 | UI、业务规则、数据与外部服务怎样连起来 | 指定规则所有者和接口；一个负责人实现首个纵向切片 | 真实入口到结果的最小闭环，失败路径可解释 |
-| 2 有界扩展 | 哪些模块可独立，哪些共享契约先固定 | 并行独立模块；共享代码顺序写；短节点自检 | 各工单证据齐全，版本可识别，准备集成 |
-| 3 集成与审查 | 功能拼起来后是否改变原行为 | 总控或指定集成者合并；审查者只读复核；作者修复发现 | 同一候选版本的关键用户路径及模块接缝通过 |
-| 4 交付/发布 | 目标环境、授权、迁移、配置、回滚及用户影响 | 先完成可审阅候选，再处理尚缺的授权；验证实际目标绑定 | 环境、部署版本、实际行为证据明确，缺项仍公开 |
-| 5 使用与维护 | 真实反馈、回归、内容/服务变化 | 分类修复，控制新需求范围；更新有用的回归和记录 | 对反馈原场景复验；没有把“无新反馈”当无缺陷 |
-| 6 暂停/归档/接班 | 在途操作、修改归属、恢复条件 | 安全停靠并保存；符合权限时关闭监督；接班前只读握手 | 一份可恢复检查点，明确谁能继续、继续哪一步 |
+| 0 Intake and setup | User problem, target users, first usable result, non-goals, and boundaries for data, cost, and release | Lead confirms scope; assignees inspect existing capabilities and run a minimal experiment if needed | Testable acceptance criteria, key unknowns, and owners |
+| 1 Minimal end-to-end path | How UI, business rules, data, and external services connect | Assign rule owners and interfaces; one owner implements the first vertical slice | A minimal real path from entry to result, with explainable failure paths |
+| 2 Bounded expansion | Which modules are independent and which shared contracts must be settled first | Parallelize independent modules; write shared code sequentially; self-check at routine checkpoints | Complete evidence for each task brief, identifiable versions, and readiness to integrate |
+| 3 Integration and review | Whether combining features changes existing behavior | Lead or assigned integrator merges; reviewers inspect read-only; authors fix findings | Critical user paths and module interactions pass on the same candidate version |
+| 4 Delivery and release | Target environment, authorization, migrations, configuration, rollback, and user impact | Finish a reviewable candidate before addressing missing authorization; verify actual target bindings | Clear evidence of the environment, deployed version, and actual behavior; gaps remain visible |
+| 5 Use and maintenance | Real feedback, regressions, and content or service changes | Triage fixes, contain new scope, and update useful regression checks and records | Recheck the original reported scenario; do not treat silence as proof of no defects |
+| 6 Pause, archive, or handoff | In-flight operations, ownership of changes, and conditions for resuming | Stop safely and save; disable monitoring when authorized; perform a read-only handoff check before takeover | A recoverable checkpoint stating who may continue and from which step |
 
-## 中途接手
+## Taking Over Work in Progress
 
-先恢复当前事实，再补历史背景：项目位置、版本和 dirty → 主检查点 → 当前工单/用户要求 → 未解决问题 → 必要原始讨论。若用户明确要求完整阅读，遵守并登记实际覆盖，不能用摘要冒充全文。
+Recover current facts before filling in history: project location, version, and uncommitted changes → main checkpoint → current task briefs and user requirements → unresolved issues → necessary original discussions. If the user explicitly requires a full reading, comply and record actual coverage. Do not present a summary as a full reading.
 
-历史越长越需要阅读索引，但索引只证明“知道文件在哪”。对影响本次决策的资料记录已读/部分/未读/不可用及冲突。不为了声称“全部了解”无限阅读，也不在关键要求未明时写入。
+Longer histories make a reading index more useful, but an index only shows where material can be found. For material that affects the current decision, record whether it is read, partially read, unread, or unavailable, along with any conflicts. Do not read indefinitely to claim complete understanding, or begin writing while key requirements remain unclear.
 
-## 空档期
+## Between Assignments
 
-没有新授权任务时，整理刚完成节点的必要记录、关闭已完成的临时监督、保存恢复入口，然后结束。不得自行开启大重构、清理用户数据或开发“顺手想到”的新功能。
+When there is no new authorized task, finish the necessary records for the completed checkpoint, close temporary monitors whose work is done, save the resumption point, and stop. Do not start a major refactor, clean up user data, or build an incidental feature on your own initiative.
 
-可以提出一至三个按收益排序的后续建议，说明依据和代价；建议不等于已获执行权。已经授权的目标尚未完成时，继续能独立推进的工作，不用“空档”掩盖停滞。
+You may suggest one to three next steps ranked by benefit, with their rationale and cost. A suggestion is not authorization to execute. If an authorized goal remains unfinished, continue work that can progress independently; do not call a stall a gap between assignments.
 
-## 需求变化
+## Changing Requirements
 
-新用户消息先判定：补充验收、纠正方向、询问状态、暂停，还是替换目标。除非用户明确取消，保留原目标与已接受限制。更新要求修订号，标出受影响工单和失效证据；只唤醒相关负责人。
+Maintain one current effective brief. Reconcile each new message with it instead of replacing the brief with the latest message. New requirements are normally incremental: they add to the active goal rather than automatically interrupting or replacing it. Unmentioned requirements and accepted limitations remain in effect.
 
-产品范围、共享接口或迁移策略变动属于长节点。局部实现选择不逐项请求用户许可。变更超出既有授权时，先完成可以独立完成的分析和可审阅方案，让用户决定真实取舍。
+Classify the relevant parts of a message before updating the brief:
 
-## 发布并不是新的开发起点
+| Intent | Update to the effective brief |
+| --- | --- |
+| Add | Include the new requirement alongside the existing ones. A repeated requirement remains valid; deduplicate its presentation, not its force. |
+| Refine | Update only the specified detail or constraint. Preserve the rest of the requirement and goal. |
+| Replace | Replace only the explicitly identified requirement or goal. Mark the affected earlier decision as superseded instead of keeping contradictory instructions active. |
+| Retract | Remove only the explicitly withdrawn requirement from active scope, retaining its status in the internal history. |
+| Pause | Suspend the requested project or workstream without cancelling its requirements. Record the conditions for resuming. |
+| Status question | Answer the question while continuing the authorized goal; do not treat a request for progress as a new replacement task. |
 
-发布前总控核对同一个版本：范围内改动、依赖、配置、数据操作、回滚、用户路径和未解决风险。禁止临发时混入重构或 UI 风格改造。
+A message may contain more than one intent. Distinguish requirements from suggestions and assumptions: a proposal or an agent's assumption does not itself authorize implementation. Do not treat a later addition as an implicit instruction to drop earlier work, or a repeated request as obsolete merely because it is repeated.
 
-发布失败先确认是否已部分生效，避免盲目重试；回滚需要理解数据兼容，不假定代码回退能撤销迁移。测试环境、生产环境和用户设备分别报告。
+Separate the desired outcome from a suggested mechanism. When invited to improve the approach, choose a better method within the effective constraints and existing authorization, explaining consequential trade-offs. Preserve explicit requirements; do not copy an illustrative example into the design merely because it appeared in the request.
 
-产品验收可以有意识接受低风险已知限制，但须注明范围、负责人与后续触发条件；不能由执行者单方面把阻塞项重命名为“后续优化”来完成工单。
+Resolve conflicts only in the affected part. Follow the applicable instruction hierarchy; at the same authority level, an explicit later revision changes the part it addresses. Recency alone does not erase unrelated requirements. If an unresolved conflict prevents a safe decision, ask about that conflict and continue independently authorized work where possible. Keep superseded or withdrawn decisions in the internal source history rather than indefinitely listing them as active requirements.
+
+For each substantive change, update the requirements revision and check affected dependencies, task briefs, interfaces, acceptance criteria, and evidence validity. Mark evidence that no longer applies, preserve unaffected requirements and evidence, and wake only the relevant owners. Keep the source trail available internally; do not include the history of each instruction in user-facing output unless requested. Present a natural synthesis of the effective requirements, without automatically emphasizing the latest addition.
+
+A pause instruction and a tool's actual execution state are separate facts. Stop new dispatches within the paused scope and use the safe-stop procedure for work already in flight. Report confirmed stops and unknown outcomes separately; do not claim an operation stopped because a pause was requested. A tool interruption or timeout does not itself cancel or replace the goal. Resolve unknown outcomes before retrying dependent operations, as described in [Recovery and Handoff](recovery.md).
+
+Changes to product scope, shared interfaces, or migration strategy are major checkpoints. Do not ask the user to approve every local implementation choice. When a change exceeds existing authorization, first complete the analysis and reviewable proposal that can be prepared independently, then let the user decide the actual tradeoffs.
+
+## Release Is Not a New Development Phase
+
+Before release, the lead checks the same version for in-scope changes, dependencies, configuration, data operations, rollback, user paths, and unresolved risks. Do not slip in refactoring or a UI restyle at release time.
+
+If a release fails, first check whether it partially took effect; do not retry blindly. Rollback requires understanding data compatibility; reverting code does not necessarily undo a migration. Report test environments, production, and user devices separately.
+
+Product acceptance may deliberately allow known low-risk limitations, but record their scope, owner, and conditions that trigger follow-up. An assignee cannot unilaterally relabel a blocker as a future improvement to mark a task brief complete.

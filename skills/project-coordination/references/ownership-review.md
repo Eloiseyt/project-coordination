@@ -1,57 +1,57 @@
-# 所有权、结构和集成审查
+# Ownership, Structure, and Integration Review
 
-## 主记录与写入权
+## Main Record and Write Ownership
 
-总控维护一份主状态；领域负责人写自己的检查点和证据，再由总控合并状态。多个文件可分别负责架构、任务和证据，但同一事实只有一个权威来源，其他处链接它。
+The lead maintains one main status record. Workstream owners write their own checkpoints and evidence, which the lead incorporates into the main status. Architecture, tasks, and evidence may live in separate files, but each fact has one authoritative source; other locations link to it.
 
-共享归属记录至少含：资源/路径、当前写入者、基线版本、允许范围、开始时间、状态、释放证据。它是协作约定，不是能阻止进程写入的锁。
+A shared ownership record includes at least the resource or path, current writer, baseline version, permitted scope, start time, status, and evidence of release. It is a coordination agreement, not a lock that prevents a process from writing.
 
-取得共享资源时：检查实时分支/版本、dirty 归属和当前操作 → 前任安全停靠并明确释放 → 总控指定新所有者 → 新所有者确认接收。仅见进程消失、聊天空闲或日期过期不能跳过确认。前任不可达则保留其修改，继续不冲突任务，向用户报告真正无法推进的部分。
+To acquire a shared resource: check the live branch and version, ownership of uncommitted changes, and current operations → the previous owner stops safely and explicitly releases it → the lead assigns a new owner → the new owner acknowledges receipt. A missing process, idle chat, or expired date does not replace confirmation. If the previous owner cannot be reached, preserve their changes, continue non-conflicting work, and tell the user precisely what cannot proceed.
 
-长期失联可走有证据的恢复接管：由具备相应授权的人批准替代交接；保存可恢复的内容与差分；通过可核验的运行状态或有效撤销写入权限确认旧执行者不能继续写；记录未知归属而不删除；新负责人基于该快照接收。缺少防止旧写入继续发生的证据时，不在争议资源上接管。不能仅新建 worktree 就认为共享数据库或云操作已隔离。
+For a prolonged loss of contact, use an evidence-backed recovery handoff: someone with the required authority approves the alternative handoff; recoverable content and diffs are preserved; verifiable runtime state or effective revocation of write access establishes that the previous assignee cannot keep writing; unresolved ownership is recorded without deleting the work; and the new owner accepts that snapshot. Do not take over a disputed resource without evidence that the previous writer cannot continue. A new worktree alone does not isolate shared databases or cloud operations.
 
-两个任务需要同一文件时，优先顺序写；或由一个集成者应用双方明确的差分。即使分属不同函数，也不能假定同时写整文件安全。不要自动 stash/reset/clean、整文件覆盖或把共享文件整体放进某一任务的提交。
+When two tasks need the same file, prefer sequential writes, or have one integrator apply clearly identified diffs from both. Working on different functions does not make concurrent whole-file writes safe. Do not automatically stash, reset, clean, overwrite the whole file, or include the entire shared file in one task's commit.
 
-## 接口契约
+## Interface Contracts
 
-并行前按实际风险明确这些内容，不要求为小函数建立协议文档：
+Before parallel work, clarify the following according to actual risk. Small functions do not require a formal protocol document:
 
-- 输入/输出类型、版本、字段所有者；非法输入由谁拒绝。
-- 标识、单位、编码、顺序、空值与缺项语义。
-- 加载、取消、重试、超时、过期结果、失败和重复请求的处理。
-- 成功何时持久化，失败是否记录；幂等和事务边界。
-- 鉴权、用户同意、敏感内容、配额和外部副作用。
-- 界面焦点、关闭/返回、窄屏、主题、错误提示及状态保留。
+- Input/output types, versions, field ownership, and who rejects invalid input.
+- Identifiers, units, encoding, ordering, and the meaning of null and missing values.
+- Handling of loading, cancellation, retries, timeouts, stale results, failures, and duplicate requests.
+- When success is persisted, whether failures are recorded, and idempotency and transaction boundaries.
+- Authentication and authorization, user consent, sensitive content, quotas, and external side effects.
+- UI focus, closing and returning, narrow screens, themes, error messages, and state preservation.
 
-接口变动先通知消费者并给出兼容方案；不能让各模块独立猜字段含义。小实验可用模拟接口，但集成前必须验证真实组合。
+Before changing an interface, notify its consumers and provide a compatibility plan. Do not leave modules to guess field meanings independently. Small experiments may use mock interfaces, but validate the real combination before integration.
 
-## 每批结构审查
+## Structure Review for Each Batch
 
-| 审查点 | 要看什么 | 不应采用的捷径 |
+| Review area | What to check | Shortcut to avoid |
 | --- | --- | --- |
-| 规则归属 | 同一校验、词法、权限或计量是否出现第二实现 | 复制现有逻辑换名字 |
-| 模块边界 | UI、业务规则、持久化和平台代码是否沿既有边界依赖 | 每个功能另建一套目录哲学 |
-| 文件位置 | 新逻辑是否放在已有负责模块，公开导出是否最小 | 无关逻辑塞入 Reader/App/utils/shared |
-| 复杂度 | 是否有多余状态、透传层、循环依赖、静默回退 | 单凭行数认定冗长，机械拆文件 |
-| 类型与契约 | 使用项目既有语言；TS 项目保留明确边界类型 | any、禁用规则或强制断言掩盖失配 |
-| 界面一致性 | 复用已有组件、色彩/间距规范和交互约定 | 每个执行者各造弹窗、按钮和布局体系 |
-| 数据兼容 | 旧记录、标识、书签/历史和升级路径是否保留 | 为测试通过清空数据或改旧标识 |
-| 依赖与代码量 | 新依赖或抽象是否解决当前真实重复/风险 | 为将来可能用到而铺设框架 |
+| Rule ownership | Whether the same validation, lexical processing, permissions, or metering has a second implementation | Copying existing logic under a new name |
+| Module boundaries | Whether dependencies among UI, business rules, persistence, and platform code follow existing boundaries | Inventing a separate directory scheme for every feature |
+| File placement | Whether new logic belongs to the existing responsible module and public exports are minimal | Putting unrelated logic in catch-all components or utility modules |
+| Complexity | Unnecessary state, pass-through layers, circular dependencies, or silent fallbacks | Judging complexity solely by line count or mechanically splitting files |
+| Types and contracts | Use of the project's existing language and explicit boundary types in TypeScript projects | Hiding mismatches with `any`, disabled rules, or forced assertions |
+| UI consistency | Reuse of existing components, color and spacing rules, and interaction conventions | Each assignee building a separate system of dialogs, buttons, and layouts |
+| Data compatibility | Preservation of existing records, identifiers, bookmarks, history, and upgrade paths | Clearing data or changing existing identifiers to pass tests |
+| Dependencies and code volume | Whether a new dependency or abstraction addresses real, current duplication or risk | Building a framework for hypothetical future needs |
 
-这是一轮针对实际差异的检查，不是要求全仓重构。发现邻近旧问题，记录并判断是否阻塞本次目标；无关问题另列工单。
+Review the actual diff; this does not call for a repository-wide refactor. Record nearby pre-existing issues and decide whether they block the current goal. Put unrelated issues in separate task briefs.
 
-## 有界审查流程
+## Bounded Review Process
 
-1. 冻结可辨认的候选：提交、差分或文件哈希；审查期间不要悄悄替换。
-2. 审查者获得原始要求、候选和证据，不只获得作者“已通过”的总结。
-3. Findings-first：位置、触发条件、用户影响、证据、最小修正；区分确定缺陷和待验证假设。
-4. 作者修复指定问题，返回变化与新增证据；总控确认是否需重审关联接缝。
-5. 关闭已复核问题，未解决项保留负责人和风险。审查没有发现问题不等于证明没有问题。
+1. Freeze an identifiable candidate: a commit, diff, or file hash. Do not silently replace it during review.
+2. Give the reviewer the original requirements, candidate, and evidence, not just the author's summary that it passed.
+3. Lead with findings: location, trigger, user impact, evidence, and the smallest correction. Separate confirmed defects from hypotheses that still need validation.
+4. The author fixes the specified issues and returns the changes and new evidence. The lead decides whether related module interactions need another review.
+5. Close rechecked issues; retain owners and risks for unresolved ones. A review with no findings does not prove there are no defects.
 
-不要让多名审查者重复检查全部内容。复杂任务按不同风险拆审查；简单任务直接自检。存在新证据才扩大测试或审查，避免无限“再查一轮”。
+Do not ask multiple reviewers to repeat a full review of the same material. Divide complex reviews by risk; self-check simple tasks. Expand testing or review only when new evidence warrants it, rather than adding endless rounds.
 
-## 集成验证
+## Integration Validation
 
-总控检查一个真实用户路径穿过所有涉及模块，并核对至少相关的异常路径。常见重点：选择/输入在模块切换后是否改变；重复请求是否重复记账；旧结果是否覆盖新结果；记录关闭是否真的不保存；权限失败是否绕过；界面在真实内容长度下是否可用。
+The lead checks a real user path through all involved modules and at least the relevant failure paths. Common checks include whether selections or input change when switching modules; duplicate requests create duplicate accounting entries; old results overwrite new ones; turning recording off actually prevents saving; permission failures are bypassed; and the UI remains usable with realistic content lengths.
 
-证据必须绑定候选版本。测试全部通过但代码随后改变，原证据只适用于未受影响范围。共同工作区完整构建成功，也不能证明当前提交仅含本任务改动。
+Tie evidence to the candidate version. If code changes after all tests pass, the earlier evidence applies only to unaffected areas. A successful full build in a shared workspace does not prove that the current commit contains only the current task's changes.

@@ -1,57 +1,61 @@
-# 汇报规则
+# Reporting
 
-## 开始时确定报告约定
+## Agree on reporting at the start
 
-记录用户语言、技术详细度、表格偏好、通知时机和需要其决定的事项。已有明确偏好直接沿用，不每轮重新问。需要跨会话协作的项目，将报告约定放在已有主状态或适配文件；一次性小任务不为此新建记录。
+Record the user's language, preferred technical detail and table format, notification timing, and decisions they need to make. Use established preferences without asking again each turn. For projects coordinated across chats, keep this agreement in the existing main status or project adapter file; do not create a record for a small, one-off task. Write user-facing reports in the user's language; the English wording of this skill and its templates does not require English reports.
 
-对于多个大问题并行的项目，默认正式报告用累计表；用户要求“每次完整汇报”时，每次正式进度报告重新列出所有约定板块，包括未变化、暂停和未完成项。原样转载旧结论前核对是否有新证据；未现场复核则注明最近证据时间/版本。
+Maintain one current effective brief by reconciling cumulative requirements. Requirements remain active when later messages omit them, and repetition reaffirms them. An explicit amendment replaces only the part it changes; update the affected acceptance conditions, dependencies, and work orders together. Move canceled or superseded requirements out of the active brief and into history so old decisions remain traceable without governing current work. An addition does not automatically interrupt or cancel ongoing authorized work.
 
-正式与中途的区分只是默认；用户明确要求每一次状态汇报都给完整表时，以该要求为准，不能通过改称“简报”缩小要求。这不表示要在没有变化时额外发送消息。
+Synthesize the full effective brief naturally in user-facing reports. Keep instruction sources and revisions in internal records; do not highlight the latest amendments or label report sections by the order in which instructions arrived unless the user asks. Continue reporting actual completed work, material risks, and decisions needed; these concern project outcomes, not the source or recency of instructions.
 
-总控对用户说清“发生了什么、影响什么、现在能用到哪一步、接下来谁做什么”。工具细节和日志放证据链接，不能拿“跑了很多测试”替代产品结论。
+For projects with several substantial issues in parallel, use a cumulative table in formal reports by default. When the user asks for a full report every time, repeat every agreed section in each formal progress report, including unchanged, paused, and unfinished items. Before repeating an earlier conclusion, check for new evidence; if it has not been rechecked, state the date and version of the latest evidence.
 
-## 不同事件怎么报
+The distinction between formal and interim reports is only a default. If the user explicitly requires a complete table in every status update, follow that requirement; do not narrow it by calling an update a brief. This does not require extra messages when nothing has changed.
 
-| 事件 | 报告内容 | 后续动作 |
+The lead explains what happened, what it affects, what the user can use now, and who does what next. Put tool details and logs behind evidence links. “Many tests ran” is not a product conclusion.
+
+## Report according to the event
+
+| Event | Report | Follow-up |
 | --- | --- | --- |
-| 普通短节点 | 新发现/变化、当前不确定项、下一步 | 在授权范围继续，不把汇报变成请示 |
-| 正式状态询问 | 先答整体判断，再给累计表和本轮变化 | 用户只是问进度时，不取消正在进行的目标 |
-| 大节点交付 | 累计表、候选版本、验收证据、剩余风险、下一节点 | 总控复核后明确可继续或需纠偏 |
-| 异常/方向偏离 | 症状、已知事实与假设、影响、已采取措施、最小下一步 | 暂停受影响动作，独立任务可继续 |
-| 需要用户决定 | 可审阅结果、选项差异、推荐与理由、为什么现有授权不足 | 清楚指出仅哪些动作在等待；沉默不算批准 |
-| 用户暂停 | 确认停止范围、每位执行者确认情况、在途/未知结果、恢复入口 | 暂停相关监督，不为“收尾漂亮”继续开发 |
-| 完成/发布 | 实际交付位置、目标环境、验证、已接受限制、恢复/回滚入口 | 关闭相应监督；不自动启动下一阶段 |
-| 例行监督无变化 | 不重复发完整表，不制造新进度 | 若用户明确要定时完整报告，则按其要求报告无变化 |
+| Routine checkpoint | New findings or changes, current uncertainties, next step | Continue within authorization; do not turn an update into a permission request |
+| Formal status request | Overall judgment first, then the cumulative table and changes this round | A progress question does not cancel the active objective |
+| Major delivery milestone | Cumulative table, candidate version, acceptance evidence, remaining risks, next milestone | After review, the lead states whether to continue or correct course |
+| Failure or departure from scope | Symptoms, known facts and hypotheses, impact, actions taken, smallest next step | Pause affected actions; independent tasks may continue |
+| User decision needed | Reviewable result, differences between options, recommendation and reasons, why existing authorization is insufficient | Specify exactly which actions are waiting; silence is not approval |
+| User pause | Scope to stop, each executor's acknowledgment, operations in progress or with unknown outcomes, resumption entry point | Pause related monitoring; do not keep developing to tidy up the finish |
+| Completion or release | Actual delivery location, target environment, verification, accepted limitations, recovery or rollback entry point | Close related monitoring; do not automatically begin the next phase |
+| Routine monitoring with no change | Do not repeat the full table or invent progress | If the user explicitly requests scheduled full reports, report the unchanged state as requested |
 
-运行中简短说明和正式总表是不同层次：长操作间按平台要求给简短进展，关键节点或本轮最终答复给完整表。不把中途一句进展当作已满足用户的完整报告要求。
+Brief updates during execution and formal cumulative reports serve different purposes: give short progress updates during long operations as the platform requires, and provide the full table at key milestones or in the turn's final response. A brief interim update does not satisfy a request for a complete report. The user's explicit requirement for a complete table in every update still takes precedence.
 
-## 累计总表
+## Cumulative table
 
-每行代表一个用户可验收的问题，而不是一个聊天或文件。稳定编号防止改名后悄悄丢项。
+Each row represents an issue with user acceptance criteria, not a chat or file. Stable identifiers prevent items from disappearing when renamed.
 
-每个问题保留原始要求来源和全部必需验收条件。复合要求可在同一行拆列条件；任何必需条件未满足，父项仍是部分满足，除非用户明确修改验收范围。不能把缺项悄悄改名为后续优化。
+Retain the original requirement source and every mandatory acceptance condition for each issue. Conditions within a compound requirement may be listed separately in the same row. If any mandatory condition is unmet, the parent item remains only partially satisfied unless the user explicitly changes the acceptance scope. Do not quietly reclassify a missing requirement as a future improvement.
 
-| 编号／用户问题 | 本轮变化与已做工作 | 状态／证据层 | 剩余缺口或阻塞 | 下一步／负责人 |
+| ID / user issue | Changes this round and work done | Status / evidence level | Remaining gaps or blockers | Next step / owner |
 | --- | --- | --- | --- | --- |
-| R-01 文件导入失败 | 修复已定位的编码路径 | 本地真实样本通过；候选 c1，2026-01-01，证据 E1；测试版未部署 | 反馈设备未复验 | 集成者准备测试版，领域负责人复验原件 |
-| R-02 在线翻译 | 客户端交互完成 | 实施者报告模拟通过；版本/时间/原始证据待补；真实服务未联调 | 资源绑定待核实 | 服务负责人完成已授权只读核查 |
+| R-01 File import failure | Fixed the identified encoding path | Real sample passed locally; candidate c1, 2026-01-01, evidence E1; test build not deployed | Not rechecked on the device where the issue was reported | Integrator prepares the test build; workstream owner retests the original file |
+| R-02 Online translation | Client interaction implemented | Implementer reports mock tests passing; version, date, and original evidence still needed; not yet tested with the real service | Resource binding needs verification | Service owner performs the authorized read-only check |
 
-这是格式示例，不是任何真实项目的状态。数量太多时按用户领域分组，仍逐项保留；细节可放附件，但用户要求完整表时不能只给附件链接。
+These are formatting examples, not the status of a real project. Group a long list by the user's subject areas while retaining every item. Details may go in an attachment, but an attachment link alone does not satisfy a request for a complete table.
 
-## 证据用语
+## Evidence wording
 
-- “已实现”：代码/产物存在，不暗示测试或发布。
-- “本地验证通过”：说明样本和测试范围；模拟、真实服务、真实文档分开。
-- “集成通过”：同一版本的真实模块组合已验证。
-- “测试环境/生产已发布”：有目标环境和版本证据；还需行为验证。
-- “用户已验收”：明确的用户确认，不从无反馈推断。
-- “实施者报告通过，待总控复核”：尚未独立检查时这样写。
-- “未验证”“部分满足”“暂停”“阻塞”：给具体原因和下一步，不能统称已完成。
+- **Implemented:** Code or an artifact exists; this does not imply testing or release.
+- **Passed local verification:** State the sample and test scope; distinguish mocks, real services, and real documents.
+- **Passed integration verification:** The actual modules were verified together at the same version.
+- **Released to the test environment or production:** Evidence identifies the target environment and version; behavior still needs verification.
+- **Accepted by the user:** Requires explicit user confirmation, not an inference from silence.
+- **Implementer reports a pass; awaiting lead review:** Use this when the evidence has not been independently checked.
+- **Unverified, partially satisfied, paused, or blocked:** Give the specific reason and next step; do not summarize these as complete.
 
-不要将不同轮次测试数量相加，制造一个更大通过数；不要给无定义的完成百分比或无依据 ETA。时间估计需要说明依赖和不确定性。
+Do not add test counts from different rounds to inflate the number passed. Avoid undefined completion percentages and unsupported ETAs. State dependencies and uncertainties with any time estimate.
 
-## 发出前快速检查
+## Quick check before sending
 
-要求是否全列出？状态是否与证据匹配？是否区分本轮变化与历史证据？真实剩余问题是否可见？每个行动是否有人负责？是否有具体需要用户决定的事项？有没有不必要的技术噪声或重复道歉？
+Are all requirements included? Does the status match the evidence? Are this round's changes distinguished from earlier evidence? Are the actual remaining issues visible? Does each action have an owner? Is there a specific decision for the user? Is there unnecessary technical noise or repeated apology?
 
-当用户指出漏报或混乱，修正主表和报告约定，而不只说“下次注意”。状态文件与消息冲突时先核对实时事实；不选择看起来更乐观的一份。
+When the user points out an omission or confusion, correct the main table and reporting agreement rather than merely promising to do better. If a status file conflicts with messages, check the current facts first; do not choose the more optimistic account.

@@ -1,109 +1,111 @@
-# 记录模板
+# Record Templates
 
-按需复制到项目现有记录；不要一次创建所有文档。方括号表示需要由项目事实填写的字段，不是可直接执行的指令。
+Copy only what is needed into existing project records; do not create every document at once. Brackets indicate fields to fill with project facts, not instructions to execute.
 
-## A. 项目协作约定 / 主检查点
+Use the user's language for user-facing reports; these English templates do not require English output. Reconcile cumulative requirements into one current effective brief, keeping affected acceptance conditions, dependencies, and work orders aligned. Canceled or superseded requirements belong in history, not the active brief. Instruction sources and revisions are for internal traceability. Reports should naturally synthesize all active requirements without instruction-sequence labels or special emphasis on the latest additions unless requested. Still include relevant evidence sources, candidate versions, and verification dates to support reported results.
+
+## A. Coordination agreement / main checkpoint
 
 ```text
-修订/更新时间：
-项目/环境/版本：
-目标与当前最小可用结果：
-明确非目标、保护数据：
-有效用户授权及来源：
-唯一整合负责人：
-报告约定：语言、详细度、累计表范围、通知触发
-领域负责人和证据位置：
-累计要求：稳定编号、原始来源、当前验收、替代关系
-任务表：编号/状态/owner/依赖/证据层与版本/缺口/下一步
-共享归属：路径或外部资源/写入者/范围/基线/释放状态
-在途或未知操作：
-最新决策与原因：
-恢复第一步：
+Revision / updated at:
+Project / environment / version:
+Goal and current smallest usable result:
+Explicit non-goals and protected data:
+Effective user authorization and source:
+Sole integration owner:
+Reporting agreement: language, detail, cumulative table scope, notification triggers
+Workstream owners and evidence locations:
+Current effective brief: cumulative active requirements, stable IDs, original sources, acceptance conditions; canceled or superseded requirements in history
+Task table: ID / status / owner / dependencies / evidence level and version / gaps / next step
+Shared ownership: path or external resource / writer / scope / baseline / release status
+Operations in progress or with unknown outcomes:
+Latest decisions and reasons:
+First step on resumption:
 ```
 
-没有并行任务时删去多余栏目。大项目可以链接专门账本，但不要复制同一事实到两份“主检查点”。
+Remove unnecessary fields when there are no parallel tasks. Large projects may link to dedicated registers, but must not duplicate the same facts in two main checkpoints.
 
-## B. 可执行工单
+## B. Executable work order
 
 ```text
-工单/关联要求/修订：
-用户可验收的结果：
-当前基线、已有事实、关键不确定项：
-原始资料和必须读的约束：
-允许读写范围；不得动的范围：
-接口输入/输出、消费者和兼容要求：
-所需验证与真实样本边界：
-依赖与共享锁：
-可自主决定的事；必须回报/停止的条件：
-预算/时间窗口（仅在用户或项目实际设定时填写）：
-是否允许子代理、最大并发及其范围（按授权填写）：
-交付位置、检查点、下一汇报节点：
+Work order / related requirement / revision:
+Result the user can accept:
+Current baseline, established facts, key uncertainties:
+Original sources and constraints that must be read:
+Permitted read/write scope; areas that must not be touched:
+Interface inputs/outputs, consumers, compatibility requirements:
+Required verification and limits of real-sample coverage:
+Dependencies and shared locks:
+Autonomous decisions; conditions requiring a report or stop:
+Budget / time window (only if actually set by the user or project):
+Subagents permitted, maximum concurrency, and scope (according to authorization):
+Delivery location, checkpoint, next reporting milestone:
 ```
 
-派发消息可以短，但不能省掉对结果、边界和证据的约定。没有新的费用/风险/接口变更，执行者在工单内自主推进。
+Dispatch messages may be brief, but must retain the agreed result, boundaries, and evidence. With no new cost, risk, or interface change, the executor proceeds autonomously within the work order.
 
-## C. 领域节点回报
+## C. Workstream checkpoint report
 
 ```text
-工单/修订/当前版本：
-本轮已改变：
-已验证行为及证据位置：
-未验证或相反证据：
-修改文件/共享差分/无关dirty保护：
-依赖或越界风险：
-下一步：继续 / 待有界审查 / 需特定决定 / 安全暂停
-在途操作或未知结果：
+Work order / revision / current version:
+Changes this round:
+Verified behavior and evidence locations:
+Unverified claims or contrary evidence:
+Changed files / shared diffs / protection of unrelated uncommitted changes:
+Dependencies or risk of exceeding scope:
+Next step: continue / await scoped review / need a specific decision / pause safely
+Operations in progress or unknown outcomes:
 ```
 
-## D. 审查结论
+## D. Review conclusion
 
 ```text
-审查者、时间、候选版本/差分：
-覆盖范围与未读项：
-发现：位置、触发、影响、证据、建议的最小修正
-判断：可按该范围继续 / 有条件继续 / 先修阻塞
-需要补的验证：
-不需要重复的既有验证：
+Reviewer, date/time, candidate version/diff:
+Coverage and unread material:
+Findings: location, trigger, impact, evidence, recommended minimal correction
+Judgment: proceed within this scope / proceed conditionally / resolve blockers first
+Additional verification needed:
+Existing verification that need not be repeated:
 ```
 
-## E. 正式用户报告
+## E. Formal user report
 
 ```text
-整体判断：当前能用到哪一步，是否需要调整方向。
-本轮变化：只列真实新增或改变的结论。
+Overall judgment: what is usable now and whether to adjust course.
+Changes this round: only actual new or changed results, not emphasis on the newest instructions.
 
-| 编号/问题及必需验收 | 已做与本轮变化 | 状态/环境/版本/时间/证据来源 | 剩余问题 | 下一步/负责人 |
+| ID / issue and mandatory acceptance conditions | Work done and changes this round | Status / environment / version / date/time / evidence source | Remaining issues | Next step / owner |
 | ... |
 
-协调决定：接口、所有权、优先级或计划有什么变化，为什么。
-需要用户决定：具体选项和取舍；没有则不制造请示。
-证据：少量可点击的主证据入口。
+Coordination decisions: changes to interfaces, ownership, priorities, or plans, and why.
+User decisions needed: concrete options and trade-offs; do not invent a request when none is needed.
+Evidence: a few clickable links to the main evidence.
 ```
 
-## F. Bug 卡片
+## F. Bug record
 
 ```text
-问题/关联需求：
-现象、预期、影响：
-版本/环境/最小输入：
-事实；假设；还缺的证据：
-第一个出错边界及根因证据：
-最小修复/非目标/责任人：
-回归及原场景复验：
-状态、剩余限制、是否进入本轮交付：
+Issue / related requirement:
+Symptoms, expected behavior, impact:
+Version / environment / minimal input:
+Facts; hypotheses; missing evidence:
+First failing boundary and root-cause evidence:
+Minimal fix / non-goals / owner:
+Regression checks and retest of the original scenario:
+Status, remaining limitations, inclusion in this delivery:
 ```
 
-## G. 暂停与接班回执
+## G. Pause and handoff acknowledgment
 
 ```text
-暂停范围/用户指令来源：
-每位执行者：确认时间、已停或仍在途、保存位置
-相关监督：已暂停 / 未能确认 / 不存在
-最后已知代码和环境版本：
-dirty/写入归属及保护数据：
-未知操作结果：
-最后通过的验证及未验证项：
-恢复条件、第一步及有权恢复者：
+Pause scope / source of the user's instruction:
+Each executor: acknowledgment time, stopped or still in progress, saved-work location
+Related monitoring: paused / unconfirmed / absent
+Last known code and environment versions:
+Uncommitted changes / write ownership / protected data:
+Unknown operation outcomes:
+Last passed verification and unverified items:
+Resumption conditions, first step, and who is authorized to resume:
 
-接班时追加：接收者、核实事实、未读/冲突、接收确认、权责切换记录
+For a handoff, add: incoming owner, verified facts, unread material/conflicts, acceptance acknowledgment, record of the authority and responsibility transfer
 ```

@@ -1,56 +1,56 @@
-# 分工与成本
+# Delegation and Cost
 
-## 先决定是否拆分
+## Decide Whether to Split the Work
 
-拆分前写一句判断：独立产出是什么，如何验收，和主线有哪些共享依赖。无法回答时先由一个人定位，不靠增加代理解决模糊任务。
+Before splitting work, write one sentence identifying the independent deliverable, how it will be accepted, and its shared dependencies with the main task. If these are unclear, have one assignee investigate first. Adding agents does not resolve an ill-defined task.
 
-评估总成本：执行＋新上下文读取＋协调＋审查＋等待＋返工。并行可能缩短时间却增加 token；两者分别报告。不能把别处的性能提升数字当作本项目承诺。
+Assess total cost: execution, reading new context, coordination, review, waiting, and rework. Parallel work may reduce elapsed time while increasing token use; report these separately. Do not promise this project performance gains measured elsewhere.
 
-| 方式 | 好处 | 代价与不适用情况 | 总控动作 |
+| Approach | Benefits | Costs and limitations | Lead's actions |
 | --- | --- | --- | --- |
-| 单代理直接做 | 上下文一致、无交接损耗 | 长任务容易遗漏全局；自审有盲点 | 保留小检查点，高风险时引入独立审查 |
-| 短期子代理 | 隔离调查，便于局部审查 | 重复读取、结论压缩失真 | 给最小原始证据，要求返回引用及边界 |
-| 长期领域聊天 | 保留模块知识，跨节点连续工作 | 口径分叉、共享修改冲突、恢复成本 | 定义领域边界和统一接口，按节点集成 |
-| 单写入者＋多个只读调查者 | 耦合代码安全、结论可并行比较 | 写入者可能成为瓶颈 | 缩小变更批次，让调查者交明确建议 |
-| 独立 worktree/分支并行 | 分离代码写入 | 仍会有合并、数据、服务和依赖冲突 | 固定基线，提前安排集成者与真实接缝测试 |
+| One agent working directly | Consistent context; no handoff overhead | Long tasks can lose sight of the whole; self-review has blind spots | Keep small checkpoints; add independent review when risk warrants it |
+| Short-lived subagents | Isolated investigation and focused review | Repeated reading; compressed conclusions can lose meaning | Supply the minimum original evidence; require references and limitations in the return |
+| Persistent workstream chats | Preserve module knowledge and continuity across checkpoints | Divergent accounts, conflicting shared edits, and recovery overhead | Define workstream boundaries and common interfaces; integrate at checkpoints |
+| One writer with several read-only investigators | Protect coupled code while comparing findings in parallel | The writer may become a bottleneck | Keep change batches small; ask investigators for specific recommendations |
+| Parallel work in separate worktrees or branches | Separate code writes | Merge, data, service, and dependency conflicts remain possible | Fix a baseline; assign an integrator and plan tests of real module interactions in advance |
 
-## 角色是责任，不是固定人数
+## Roles Define Responsibilities, Not Headcount
 
-- **用户**：产品方向、偏好及需要其决定的授权；不承担替代理搬运上下文和合并工作的责任。
-- **总控**：维护累计需求、关键依赖、有效权限、写入归属、重大技术取舍和最终验收。亲自处理低成本集成，避免纯转发。
-- **领域负责人**：对一个完整结果负责；管理自己的证据和子任务，先自检再交付。不只交几个孤立文件。
-- **子代理**：完成有限任务后返回；默认不拥有全局状态、发布和跨模块决策权。
-- **审查者**：只读核对某个候选，指出具体缺陷、影响和证据；不与作者同时修改同一内容。
+- **User**: Sets product direction, preferences, and authorizations that require their decision. The user is not responsible for carrying context between agents or merging their work.
+- **Lead**: Maintains cumulative requirements, key dependencies, current authorizations, write ownership, major technical tradeoffs, and final acceptance. Handles inexpensive integration directly instead of merely forwarding messages.
+- **Workstream owner**: Owns a complete outcome, manages its evidence and subtasks, and checks the work before delivery. Delivers more than a few disconnected files.
+- **Subagent**: Completes a bounded task and returns. By default, has no authority over global state, releases, or cross-module decisions.
+- **Reviewer**: Examines a candidate read-only and identifies specific defects, impact, and evidence. Does not edit the same content concurrently with its author.
 
-小项目可以一个代理兼任多种职责；“独立审查”只有另一个评估者未受结论引导时才这样称呼。模型一致也可能共同犯错，关键路径仍需真实验证。
+One agent may fill several roles in a small project. Call a review independent only when a separate evaluator has not been steered toward a conclusion. Models can agree and still share the same error; critical paths still need real validation.
 
-## 派发与子代理再委派
+## Dispatch and Further Delegation
 
-从模板抽取工单，而不是复制整段历史。明确原始要求位置、关键决定、输入版本、允许读写路径、输出位置和回传节点。保留歧义和相反证据，不能只给期待答案。
+Use the relevant parts of a template to create a task brief instead of copying the entire history. Specify where to find the original requirements, key decisions, input version, permitted read/write paths, output location, and return checkpoint. Preserve ambiguities and contrary evidence; do not supply only the expected answer.
 
-独立用户聊天、后台自动任务和内部子代理是不同资源；以当前平台授权为准。用户同意“协作”不等于允许任意创建聊天、发外部消息、修改权限或启用收费服务。
+Separate user chats, background automations, and internal subagents are different resources; follow the current platform's authorization rules. Consent to collaborate does not authorize arbitrary chat creation, external messages, permission changes, or paid services.
 
-子代理再拆分必须同时满足：平台与用户许可、父任务工单允许、范围可再分、总并发/预算仍有余量、父负责人能审查结果。新增层级通常需要总控重新评估。禁止无限递归委派、相互唤醒和循环派回同一任务。
+Further delegation by a subagent requires all of the following: platform and user permission, allowance in the parent task brief, divisible scope, remaining concurrency and budget capacity, and a parent owner able to review the results. Adding a level usually requires reassessment by the lead. Do not allow unbounded recursive delegation, mutual wakeups, or loops that dispatch work back to the same task.
 
-跨模块分歧先由相关负责人基于同一版本交换事实；若涉及用户契约、共享所有权或优先级，由总控裁定。不要让用户在多个聊天中转述同一个决定。
+For cross-module disagreements, the relevant owners first exchange facts about the same version. The lead resolves matters involving the user contract, shared ownership, or priorities. Do not make the user relay the same decision across multiple chats.
 
-## 节点与监督频率
+## Checkpoints and Monitoring Frequency
 
-- **短节点**：出现新证据、完成一个可运行切片、确定接口、发现阻塞。报告增量即可，正常则自主继续。
-- **长节点**：完整功能贯通、共享契约改变、数据迁移、外部发布、用户验收、总控交接。总控需要看实际产物和影响。
-- 对仍在执行且无新证据的长命令，不重复催问、重启或开第二个相同任务。
-- 先读紧凑状态和证据索引；只有新节点、异常、接缝风险才展开完整日志。无变化降低检查频率。
-- 监督工具只是调度；定时器到了不是任务完成，也不是安全接管锁的证据。
+- **Routine checkpoints**: New evidence, a runnable slice, a settled interface, or a discovered blocker. Report the change and continue autonomously when work is on track.
+- **Major checkpoints**: A complete feature works end to end, a shared contract changes, data migrates, a release goes live, the user accepts a result, or the lead hands over. The lead must inspect the actual deliverable and its impact.
+- Do not repeatedly request updates, restart, or launch a duplicate task for a long command that is still running without new evidence.
+- Read compact status and the evidence index first. Expand full logs only for a new checkpoint, an exception, or a risk at a module boundary. Check less often when nothing changes.
+- Monitoring tools schedule work. A timer firing proves neither task completion nor that a lock can safely be taken over.
 
-## 降低成本的具体做法
+## Practical Ways to Reduce Cost
 
-1. 一个要求只在主账本保留完整定义；工单引用它并写本次差异。
-2. 给新执行者最小充分上下文，不默认继承全部聊天；需要原文就指向原文。
-3. 领域负责人返回结论、证据路径和不确定项，不返回成千上万行终端输出。
-4. 保留每次证据对应的版本。未修改的路径和条件不变时复用验证；关键条件改变后只重跑受影响层。
-5. 独立读取可以并行；修改、审批和依赖操作顺序执行。
-6. 根据合并能力限制在制品。待审积压时先集成或缩减派发，不继续堆生成量。
-7. 发现协调成本持续高于直接处理时，将耦合部分收回给一个负责人。
-8. 用户要求完整总表时保证完整；从主账本更新，不重新调查所有已稳定事项。明确未复核项。
+1. Keep each requirement's full definition only in the main record. Task briefs reference it and state the current differences.
+2. Give new assignees the minimum sufficient context instead of inheriting every chat by default. Point to the original when the original is needed.
+3. Workstream owners return conclusions, evidence locations, and uncertainties, not thousands of lines of terminal output.
+4. Keep the version associated with each piece of evidence. Reuse validation for unchanged paths when conditions are unchanged; when key conditions change, rerun only the affected layers.
+5. Independent reads may run in parallel. Perform edits, approvals, and dependent operations in sequence.
+6. Limit work in progress to integration capacity. When reviews pile up, integrate first or reduce dispatches instead of generating more output.
+7. If coordination consistently costs more than direct work, return the coupled parts to one owner.
+8. Provide a complete cumulative table when the user requests one. Update it from the main record instead of reinvestigating every settled item, and identify what has not been rechecked.
 
-可选监测：返工原因、重复工具调用、等待时长、审查积压、漏掉的验收项、实际 token（工具可得时）。没有测量就写未知，不编造节省比例；简单项目无需新建监控系统。
+Optional measures include causes of rework, duplicate tool calls, waiting time, review backlog, missed acceptance criteria, and actual token use when tools expose it. Report unmeasured values as unknown; do not invent savings percentages. Simple projects do not need a new monitoring system.
